@@ -1,0 +1,54 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Bilbo+Swash+Caps&display=swap'); */
+
+*, *::after, *::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    background-color: var(--grey1);
+
+}
+
+:root {
+    --grey1: #efefefa6;
+    --loadingBg: #edd1aa;
+    --brown1: #ECC389;
+    --brown2: #E8A241;
+    --brown3: #BC8334;
+    --brown4: #B47F33;
+    --brown5: #6A563D;
+    --brown6: #DDCA7D;
+    --brown7: #B88B4A;
+    --black1: #00000082;
+}
+
+
+
+main {
+    max-width: 1050px;
+    width: 67.5%;
+    margin: 0 auto;
+    padding: 2.063rem 0;
+    border-radius: 0.625rem;
+}
+
+@media (max-width: 1024px){
+    main{
+        width: 90%;
+    } 
+}
+
+.showHideReserva{
+    display: flex !important;
+}
+
+.modal-open {
+    overflow: hidden;
+}
+
+button {
+    cursor: pointer;
+}

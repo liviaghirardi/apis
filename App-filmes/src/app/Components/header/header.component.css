@@ -1,0 +1,370 @@
+/*NAVBAR*/
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 50px;
+    z-index: 3;
+}
+
+.mobile{
+    display: none;
+}
+
+.desktop {
+    height: 70px;
+    width: 100vw;
+    background-color: var(--blue2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+    position: relative;
+}
+
+ul {
+    display: flex;
+}
+
+li {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin-right: 1.5em;
+}
+
+.favoritos {
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    background-color: var(--header);
+    display: flex;
+    border: none;
+    border-radius: 5px;
+    align-items: center;
+    width: 110px;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.favoritos:hover {
+    cursor: pointer;
+    background-color: var(--blue2);
+    color: var(--yellow);
+}
+
+.salvos {
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    background-color: var(--header);
+    display: flex;
+    border: none;
+    border-radius: 5px;
+    align-items: center;
+    width: 150px;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.salvos:hover {
+    cursor: pointer;
+    background-color: var(--blue2);
+    color: var(--yellow);
+}
+
+.pesquisa input {
+    width: 450px;
+    background-color: var(--blue3);
+    border: none;
+    border-radius: 15px;
+    color: var(--font);
+    height: 28px;
+    padding: 0 30px;
+}
+
+form {
+    display: flex;
+    align-items: center;
+}
+
+.botao-pesquisa {
+    background-color: var(--blue2);
+    border: none;
+    color: aliceblue;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+input:focus {
+    outline: 1px solid rgb(255, 233, 154);
+}
+
+.usuario {
+    display: flex;
+}
+
+.nome-usuario {
+    color: rgb(239, 239, 239);
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.usuario img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    margin-left: 15px;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-left: 10px;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+::ng-deep .mat-menu-content {
+    width: 280px;
+    height: 180px;
+
+}
+
+.titulo-menu {
+    text-align: center;
+    color: aliceblue;
+    padding: 10px;
+    font-size: 14px;
+}
+
+.menu {
+    padding: 10px;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+mat-divider {
+    background-color: var(--blue3);
+    margin: 10px 0;
+}
+
+
+/*LISTA DE FILMES PESQUISA*/
+
+.container {
+    margin: 0;
+    width: 100vw;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.titulo-pesquisa {
+    color: rgb(226, 233, 240);
+    padding: 100px 0 50px 60px;
+}
+
+.lista-filmes-pesquisa {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    padding: 0 50px;
+
+}
+
+.card-filme {
+    background-color: var(--blue3);
+    border: none;
+    width: 170px;
+    height: 350px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin: 8px;
+}
+
+.poster {
+    width: 100%;
+    height: 72%;
+    border-radius: 5px 5px 0 0;
+}
+
+.conteudo-card {
+    height: 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.avaliacao {
+    display: flex;
+    width: 90%;
+    height: auto;
+    align-items: center;
+    color: var(--font);
+    font-size: 15px;
+}
+
+.avaliacao-e-favoritar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 90%;
+    height: 50px;
+    padding: 0 10px;
+    margin-top: 5px;
+}
+
+.titulo-filme {
+    font-size: 14px;
+    color: white;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.icone-estrela {
+    margin-right: 10px;
+    width: 15px;
+}
+
+.icone-coracao:hover {
+    cursor: pointer;
+}
+
+.assistir-mais-tarde {
+    background-color: var(--blue2);
+    color: var(--blue);
+    font-weight: bold;
+    font-size: 12px;
+    border: none;
+    border-radius: 5px;
+    padding: 8px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.assistir-mais-tarde div {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.assistir-mais-tarde:hover {
+    opacity: 0.8;
+}
+
+@media only screen and (max-device-width: 900px) {
+    .desktop {
+        display: none;
+    }
+
+    .mobile {
+        background-color: var(--blue2);
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        padding: 10px;
+    }
+
+
+    .pesquisa-mobile input {
+        width: 130px;
+        background-color: var(--blue3);
+        border: none;
+        border-radius: 15px;
+        color: var(--font);
+        height: 28px;
+        padding: 0 15px;
+    }
+
+    .usuario-mobile{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .usuario-mobile img{
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+    }
+
+    ::ng-deep .mat-menu-content{
+        width: auto;
+        height: auto;
+    }
+
+
+    .titulo-pesquisa{
+        padding: 0;
+        margin: 80px 0 30px 20px;
+    }
+
+    .lista-filmes-pesquisa {
+        display: flex;
+        width: 100%;
+        flex-wrap: wrap;
+        box-sizing: border-box;
+        padding: 0 30px;
+
+    }
+
+    .card-filme {
+        background-color: var(--blue3);
+        border: none;
+        width: 140px;
+        height: 300px;
+        border-radius: 5px;
+        box-sizing: border-box;
+        margin: 5px;
+    }
+
+    .poster {
+        width: 100%;
+        height: 65%;
+        border-radius: 5px 5px 0 0;
+    }
+
+    .conteudo-card {
+        height: 35%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .avaliacao {
+        display: flex;
+        width: 90%;
+        height: 20px;
+        align-items: center;
+        color: rgb(215, 215, 215);
+        font-size: 14px;
+    }
+
+    .titulo-filme {
+        display: none;
+    }
+
+
+}

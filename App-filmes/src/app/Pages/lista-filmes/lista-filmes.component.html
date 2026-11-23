@@ -1,0 +1,344 @@
+<app-header>
+    <ng-container>
+        <div class="container">
+            <h1 class="titulo-lista">Lançamentos</h1>
+            <p class="sub">Confira os últimos lançamentos nos cinemas brasileiros:</p>
+            <app-carrossel></app-carrossel>
+            <h1 class="titulo-lista">O que assistir</h1>
+            <p class="sub">Está em busca de um novo filme para assistir? Encontre nas listas abaixo ou busque por gênero:</p>
+            <mat-tab-group>
+                <mat-tab label="Listas" >
+                    <section class="header-lista" *ngIf="!verMaisPopulares">
+                        <div class="subtitulo-lista">
+                            <img src="/assets/barra.png" height="25px">
+                            <h2>Melhores Avaliados</h2>
+                        </div>
+                        <button *ngIf="!verMaisMelhores" class="btn-acoes slide_in" (click)="listarTodosMelhoresAvaliados()">Ver
+                            mais</button>
+                        <button *ngIf="verMaisMelhores" class="btn-acoes" (click)="voltarHome()">Voltar</button>
+                    </section>
+
+                    <section class="carrossel" *ngIf="!verMaisMelhores && !verMaisPopulares">
+                        <div class="filmes-desktop">
+                            <button class="seta-esquerda"  (click)="voltar()"><img src="/assets/seta-esquerda.png"
+                                width="35px"></button>
+                                    <div class="card-filme" *ngFor="let filme of listaTopFilmes.results | slice: inicio:final">
+                                        <a [routerLink]="'/filmes/' + filme.id"><img
+                                                [src]="'https://image.tmdb.org/t/p/original/' + filme.poster_path"
+                                                class="poster" loading="lazy"></a>
+                                        <div class="conteudo-card">
+                                            <div class="avaliacao-e-favoritar">
+                                                <div class="avaliacao">
+                                                    <img src="/assets/estrela.png" class="icone-estrela">
+                                                    <p>{{ filme.vote_average }}</p>
+                                                </div>
+                                                <div *ngIf="filme.isFavorite == undefined || filme.isFavorite == false"><img
+                                                        src="/assets/coracaoVazio.png" width="23px" class="icone-coracao"
+                                                        (click)="favoritar(filme)"></div>
+                                                <div *ngIf="filme.isFavorite == true"><img src="/assets/coracaoCheio.png"
+                                                        width="23px" class="icone-coracao"></div>
+                                            </div>
+
+                                            <button class="assistir-mais-tarde" (click)="salvar(filme)">
+                                                <div *ngIf="filme.isSave == undefined"><img src="/assets/salvar.png" width="16px">
+                                                    Assistir depois</div>
+                                                <div *ngIf="filme.isSave == true"><img src="/assets/salvar-cheio.png" width="16px">
+                                                    Assistir depois</div>
+                                            </button>
+                                        </div>
+                                </div>
+
+                        <button *ngIf="this.final < this.listaTopFilmes.results.length" id="slide-arrow-next" class="seta-direita"
+                            (click)="avancar()"><img src="/assets/seta-direita.png" width="35px"></button>
+
+                        </div>
+                        <div class="filmes-mobile">
+                                    <div class="card-filme" *ngFor="let filme of listaTopFilmes.results">
+                                        <a [routerLink]="'/filmes/' + filme.id"><img
+                                                [src]="'https://image.tmdb.org/t/p/original/' + filme.poster_path"
+                                                class="poster" loading="lazy"></a>
+                                        <div class="conteudo-card">
+                                            <div class="avaliacao-e-favoritar">
+                                                <div class="avaliacao">
+                                                    <img src="/assets/estrela.png" class="icone-estrela">
+                                                    <p>{{ filme.vote_average }}</p>
+                                                </div>
+                                                <div *ngIf="filme.isFavorite == undefined || filme.isFavorite == false"><img
+                                                        src="/assets/coracaoVazio.png" width="23px" class="icone-coracao"
+                                                        (click)="favoritar(filme)"></div>
+                                                <div *ngIf="filme.isFavorite == true"><img src="/assets/coracaoCheio.png"
+                                                        width="23px" class="icone-coracao"></div>
+                                            </div>
+
+                                            <button class="assistir-mais-tarde" (click)="salvar(filme)">
+                                                <div *ngIf="filme.isSave == undefined"><img src="/assets/salvar.png" width="16px">
+                                                    Assistir depois</div>
+                                                <div *ngIf="filme.isSave == true"><img src="/assets/salvar-cheio.png" width="16px">
+                                                    Assistir depois</div>
+                                            </button>
+                                        </div>
+                                </div>
+                        </div>
+
+                    </section>
+                    <section class="cards lista-desktop" *ngIf="verMaisMelhores">
+                        <div class="card-filme"
+                            *ngFor="let filme of listaTopFilmesCompleta">
+                            <a [routerLink]="'/filmes/' + filme.id"><img
+                                    [src]="'https://image.tmdb.org/t/p/original/' + filme.poster_path"
+                                    class="poster" loading="lazy"></a>
+                            <div class="conteudo-card">
+                                <div class="avaliacao-e-favoritar">
+                                    <div class="avaliacao">
+                                        <img src="/assets/estrela.png" class="icone-estrela">
+                                        <p>{{ filme.vote_average }}</p>
+                                    </div>
+                                    <div *ngIf="filme.isFavorite == undefined || filme.isFavorite == false"><img
+                                            src="/assets/coracaoVazio.png" width="23px" class="icone-coracao"
+                                            (click)="favoritar(filme)"></div>
+                                    <div *ngIf="filme.isFavorite == true"><img src="/assets/coracaoCheio.png"
+                                            width="23px" class="icone-coracao"></div>
+                                </div>
+
+                                <button class="assistir-mais-tarde" (click)="salvar(filme)">
+                                    <div *ngIf="filme.isSave == undefined"><img src="/assets/salvar.png" width="16px">
+                                        Assistir depois</div>
+                                    <div *ngIf="filme.isSave == true"><img src="/assets/salvar-cheio.png" width="16px">
+                                        Assistir depois</div>
+                                </button>
+                            </div>
+                        </div>
+                        <button (click)="voltarAoTopo()" class="btn-voltar"><img src="/assets/pra-cima.png" width="40px"></button>
+                    </section>
+
+                    <section class="cards lista-mobile"  *ngIf="verMaisMelhores">
+
+                        <div class="card-filme" id="topo"
+                            *ngFor="let filme of listaTopFilmesCompleta">
+                            <a [routerLink]="'/filmes/' + filme.id"><img
+                                    [src]="'https://image.tmdb.org/t/p/original/' + filme.poster_path"
+                                    class="poster" loading="lazy"></a>
+                            <div class="conteudo-card">
+                                <div class="avaliacao-e-favoritar">
+                                    <div class="avaliacao">
+                                        <img src="/assets/estrela.png" class="icone-estrela">
+                                        <p>{{ filme.vote_average }}</p>
+                                    </div>
+                                    <div *ngIf="filme.isFavorite == undefined || filme.isFavorite == false"><img
+                                            src="/assets/coracaoVazio.png" width="23px" class="icone-coracao"
+                                            (click)="favoritar(filme)"></div>
+                                    <div *ngIf="filme.isFavorite == true"><img src="/assets/coracaoCheio.png"
+                                            width="23px" class="icone-coracao"></div>
+                                </div>
+
+                                <button class="assistir-mais-tarde" (click)="salvar(filme)">
+                                    <div *ngIf="filme.isSave == undefined"><img src="/assets/salvar.png" width="16px">
+                                        Assistir depois</div>
+                                    <div *ngIf="filme.isSave == true"><img src="/assets/salvar-cheio.png" width="16px">
+                                        Assistir depois</div>
+                                </button>
+                                <button (click)="voltarAoTopo()" class="btn-voltar"><img src="/assets/pra-cima.png" width="30px"></button>
+                            </div>
+                        </div>
+
+                    </section>
+
+                    <!--LISTA POPULARES-->
+                    <section class="header-lista" *ngIf="!verMaisMelhores">
+                        <div class="subtitulo-lista">
+                            <img src="/assets/barra.png" height="25px">
+                            <h2>Os Mais Populares</h2>
+                        </div>
+                        <button *ngIf="!verMaisPopulares" class="btn-acoes" (click)="listarTodosPopulares()">Ver
+                            mais</button>
+                        <button *ngIf="verMaisPopulares" class="btn-acoes" (click)="voltarHome()">Voltar</button>
+                    </section>
+
+                    <section class="carrossel" *ngIf="!verMaisMelhores && !verMaisPopulares">
+                        <div class="filmes-desktop">
+                            <button class="seta-esquerda" (click)="voltar2()"><img src="/assets/seta-esquerda.png"
+                                width="35px"></button>
+                        <div class="card-filme" *ngFor="let filme of listaPopulares.results | slice: inicio2:final2">
+                            <a [routerLink]="'/filmes/' + filme.id"><img
+                                    [src]="'https://image.tmdb.org/t/p/original/' + filme.poster_path"
+                                    class="poster" loading="lazy"></a>
+                            <div class="conteudo-card">
+                                <div class="avaliacao-e-favoritar">
+                                    <div class="avaliacao">
+                                        <img src="/assets/estrela.png" class="icone-estrela">
+                                        <p>{{filme.vote_average | number}}</p>
+                                    </div>
+                                    <div *ngIf="filme.isFavorite == undefined"><img src="/assets/coracaoVazio.png"
+                                            width="23px" class="icone-coracao" (click)="favoritar(filme)"></div>
+                                    <div *ngIf="filme.isFavorite == true"><img src="/assets/coracaoCheio.png"
+                                            width="23px" class="icone-coracao"></div>
+                                </div>
+
+                                <button class="assistir-mais-tarde" (click)="salvar(filme)">
+                                    <div *ngIf="filme.isSave == undefined"><img src="/assets/salvar.png" width="16px">
+                                        Assistir depois</div>
+                                    <div *ngIf="filme.isSave == true"><img src="/assets/salvar-cheio.png" width="16px">
+                                        Assistir depois</div>
+                                </button>
+                            </div>
+                        </div>
+                        <button *ngIf="this.final2 < this.listaTopFilmes.results.length" class="seta-direita"
+                            (click)="avancar2()"><img src="/assets/seta-direita.png" width="35px"></button>
+                        </div>
+                        <div class="filmes-mobile">
+                            <div class="card-filme" *ngFor="let filme of listaPopulares.results">
+                                <a [routerLink]="'/filmes/' + filme.id"><img
+                                        [src]="'https://image.tmdb.org/t/p/original/' + filme.poster_path"
+                                        class="poster" loading="lazy"></a>
+                                <div class="conteudo-card">
+                                    <div class="avaliacao-e-favoritar">
+                                        <div class="avaliacao">
+                                            <img src="/assets/estrela.png" class="icone-estrela">
+                                            <p>{{filme.vote_average | number}}</p>
+                                        </div>
+                                        <div *ngIf="filme.isFavorite == undefined"><img src="/assets/coracaoVazio.png"
+                                                width="23px" class="icone-coracao" (click)="favoritar(filme)"></div>
+                                        <div *ngIf="filme.isFavorite == true"><img src="/assets/coracaoCheio.png"
+                                                width="23px" class="icone-coracao"></div>
+                                    </div>
+
+                                    <button class="assistir-mais-tarde" (click)="salvar(filme)">
+                                        <div *ngIf="filme.isSave == undefined"><img src="/assets/salvar.png" width="16px">
+                                            Assistir depois</div>
+                                        <div *ngIf="filme.isSave == true"><img src="/assets/salvar-cheio.png" width="16px">
+                                            Assistir depois</div>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </section>
+                    <section class="cards lista-desktop" *ngIf="verMaisPopulares">
+                        <div class="card-filme"
+                            *ngFor="let filme of listaPopularesCompleta">
+                            <a [routerLink]="'/filmes/' + filme.id"><img
+                                    [src]="'https://image.tmdb.org/t/p/original/' + filme.poster_path"
+                                    class="poster" loading="lazy"></a>
+                            <div class="conteudo-card">
+                                <div class="avaliacao-e-favoritar">
+                                    <div class="avaliacao">
+                                        <img src="/assets/estrela.png" class="icone-estrela">
+                                        <p>{{ filme.vote_average  | number}}</p>
+                                    </div>
+                                    <div *ngIf="filme.isFavorite == undefined || filme.isFavorite == false"><img
+                                            src="/assets/coracaoVazio.png" width="23px" class="icone-coracao"
+                                            (click)="favoritar(filme)"></div>
+                                    <div *ngIf="filme.isFavorite == true"><img src="/assets/coracaoCheio.png"
+                                            width="23px" class="icone-coracao"></div>
+                                </div>
+
+                                <button class="assistir-mais-tarde" (click)="salvar(filme)">
+                                    <div *ngIf="filme.isSave == undefined"><img src="/assets/salvar.png" width="16px">
+                                        Assistir depois</div>
+                                    <div *ngIf="filme.isSave == true"><img src="/assets/salvar-cheio.png" width="16px">
+                                        Assistir depois</div>
+                                </button>
+                            </div>
+                        </div>
+                        <button (click)="voltarAoTopo()" class="btn-voltar"><img src="/assets/pra-cima.png" width="40px"></button>
+                    </section>
+
+                    <section class="cards lista-mobile" *ngIf="verMaisPopulares">
+                        <div class="card-filme"
+                            *ngFor="let filme of listaPopularesCompleta ">
+                            <a [routerLink]="'/filmes/' + filme.id"><img
+                                    [src]="'https://image.tmdb.org/t/p/original/' + filme.poster_path"
+                                    class="poster" loading="lazy"></a>
+                            <div class="conteudo-card">
+                                <div class="avaliacao-e-favoritar">
+                                    <div class="avaliacao">
+                                        <img src="/assets/estrela.png" class="icone-estrela">
+                                        <p>{{ filme.vote_average  | number}}</p>
+                                    </div>
+                                    <div *ngIf="filme.isFavorite == undefined || filme.isFavorite == false"><img
+                                            src="/assets/coracaoVazio.png" width="23px" class="icone-coracao"
+                                            (click)="favoritar(filme)"></div>
+                                    <div *ngIf="filme.isFavorite == true"><img src="/assets/coracaoCheio.png"
+                                            width="23px" class="icone-coracao"></div>
+                                </div>
+
+                                <button class="assistir-mais-tarde" (click)="salvar(filme)">
+                                    <div *ngIf="filme.isSave == undefined"><img src="/assets/salvar.png" width="16px">
+                                        Assistir depois</div>
+                                    <div *ngIf="filme.isSave == true"><img src="/assets/salvar-cheio.png" width="16px">
+                                        Assistir depois</div>
+                                </button>
+                                <button (click)="voltarAoTopo()" class="btn-voltar"><img src="/assets/pra-cima.png" width="30px"></button>
+                            </div>
+                        </div>
+
+                    </section>
+                </mat-tab>
+                <mat-tab label="Gêneros">
+                    <div class="generos">
+                        <div *ngFor="let genero of listaGeneros.genres; let i = index">
+                            <p class="genero" (click)="mudarCor(genero)" [ngClass]="genero.ativo? 'focus' : 'genero'"
+                                (click)="filtrarGenero(genero.id)">{{genero.name}}</p>
+                        </div>
+                    </div>
+                    <div class="cards lista-desktop">
+                        <div class="card-filme" *ngFor="let filme of filtrados">
+                            <a [routerLink]="'/filmes/' + filme.id"><img
+                                    [src]="'https://image.tmdb.org/t/p/original/' + filme.poster_path"
+                                    class="poster" loading="lazy"></a>
+                            <div class="conteudo-card">
+                                <div class="avaliacao-e-favoritar">
+                                    <div class="avaliacao">
+                                        <img src="/assets/estrela.png" class="icone-estrela">
+                                        <p>{{filme.vote_average | number}}</p>
+                                    </div>
+                                    <div *ngIf="filme.isFavorite == undefined"><img src="/assets/coracaoVazio.png"
+                                            width="23px" class="icone-coracao" (click)="favoritar(filme)"></div>
+                                    <div *ngIf="filme.isFavorite == true"><img src="/assets/coracaoCheio.png"
+                                            width="23px" class="icone-coracao"></div>
+                                </div>
+
+                                <button class="assistir-mais-tarde" (click)="salvar(filme)">
+                                    <div *ngIf="filme.isSave == undefined"><img src="/assets/salvar.png" width="16px">
+                                        Assistir depois</div>
+                                    <div *ngIf="filme.isSave == true"><img src="/assets/salvar-cheio.png" width="16px">
+                                        Assistir depois</div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <button (click)="voltarAoTopo()" class="btn-voltar"><img src="/assets/pra-cima.png" width="40px"></button>
+                    <div class="cards lista-mobile">
+                        <div class="card-filme" *ngFor="let filme of filtrados">
+                            <a [routerLink]="'/filmes/' + filme.id"><img
+                                    [src]="'https://image.tmdb.org/t/p/original/' + filme.poster_path"
+                                    class="poster" loading="lazy"></a>
+                            <div class="conteudo-card">
+                                <div class="avaliacao-e-favoritar">
+                                    <div class="avaliacao">
+                                        <img src="/assets/estrela.png" class="icone-estrela">
+                                        <p>{{filme.vote_average | number}}</p>
+                                    </div>
+                                    <div *ngIf="filme.isFavorite == undefined"><img src="/assets/coracaoVazio.png"
+                                            width="23px" class="icone-coracao" (click)="favoritar(filme)"></div>
+                                    <div *ngIf="filme.isFavorite == true"><img src="/assets/coracaoCheio.png"
+                                            width="23px" class="icone-coracao"></div>
+                                </div>
+
+                                <button class="assistir-mais-tarde" (click)="salvar(filme)">
+                                    <div *ngIf="filme.isSave == undefined"><img src="/assets/salvar.png" width="16px">
+                                        Assistir depois</div>
+                                    <div *ngIf="filme.isSave == true"><img src="/assets/salvar-cheio.png" width="16px">
+                                        Assistir depois</div>
+                                </button>
+                                <button (click)="voltarAoTopo()" class="btn-voltar"><img src="/assets/pra-cima.png" width="30px"></button>
+                            </div>
+                        </div>
+                    </div>
+
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+    </ng-container>
+</app-header>

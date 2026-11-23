@@ -1,0 +1,81 @@
+name: pokedex
+description: Fully functional multiplatform Pokedex App developed using Flutter with lots of animations and all Pokémon generations
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.5.0
+
+environment:
+  sdk: '>=3.6.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  flutter_svg: ^2.0.16
+  http: ^1.2.2
+  mobx: ^2.5.0
+  flutter_mobx: ^2.3.0
+  mobx_codegen: ^2.7.0
+  cached_network_image: ^3.4.1
+  get_it: ^8.0.3
+  lottie: ^3.3.0
+  sliding_up_panel: ^2.0.0+1
+  font_awesome_flutter: ^10.8.0
+  bot_toast: ^4.1.3
+  audio_video_progress_bar: ^2.0.3
+  flutter_launcher_icons: ^0.14.2
+  flutter_native_splash: ^2.4.3
+  shared_preferences: ^2.3.4
+  infinite_scroll_pagination: ^4.1.0
+  dio: ^5.7.0
+  animated_theme_switcher: 2.0.9
+  audioplayers: ^6.1.0
+  window_size:
+    git:
+      url: https://github.com/google/flutter-desktop-embedding.git
+      path: plugins/window_size
+  
+
+dev_dependencies:
+  mockito:
+  build_runner:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/lotties/
+    - assets/images/icons/
+    - assets/images/pokemons_types/
+    - assets/images/pokemons_types/16/
+    - assets/images/pokemons_types/20/
+    - assets/images/pokemons_types/60/
+    - assets/images/technical_records_types/
+    - assets/images/technical_machines_types/
+    - assets/images/pokemons_generations/generation_1/
+    - assets/images/pokemons_generations/generation_2/
+    - assets/images/pokemons_generations/generation_3/
+    - assets/images/pokemons_generations/generation_4/
+    - assets/images/pokemons_generations/generation_5/
+    - assets/images/pokemons_generations/generation_6/
+    - assets/images/pokemons_generations/generation_7/
+    - assets/images/pokemons_generations/generation_7/
+    - assets/images/pokemons_generations/generation_8/
+
+  fonts:
+    - family: CircularStd-Book
+      fonts:
+        - asset: assets/fonts/CircularStd-Book.otf
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/icons/app_icon.png"
+
+flutter_native_splash:
+  image: "assets/images/splash_logo.png"
+  color: "#FFFFFF"
